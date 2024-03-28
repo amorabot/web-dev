@@ -4,7 +4,6 @@ A repository containing code snippets and web development practice studies! The 
 Technologies:
 Vue.js
 shadcd/ui
-Tailwind and vanilla CSS
+Tailwind
+Vanilla CSS
 HTML
-
-Second commit test
