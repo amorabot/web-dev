@@ -20,38 +20,38 @@ This is a solution to the [QR code component challenge on Frontend Mentor](https
 
 ## Table of contents
 
-- [Overview](#overview(QRCODE))
-  - [Screenshot](#screenshot(QRCODE))
-  - [Links](#links(QRCODE))
-- [My process](#my-process(QRCODE))
-  - [Built with](#built-with(QRCODE))
-  - [What I learned](#what-i-learned(QRCODE))
-  - [Useful resources](#useful-resources(QRCODE))
+- [Overview](#overview-QRcode)
+  - [Screenshot](#screenshot-QRcode)
+  - [Links](#links-QRcode)
+- [My process](#my-process-QRcode)
+  - [Built with](#built-with-QRcode)
+  - [What I learned](#what-i-learned-QRcode)
+  - [Useful resources](#useful-resources-QRcode)
 - [Author](#author)
 
-## Overview(QRCODE)
+## Overview QRCode
 
-### Screenshot
+### Screenshot QRCode
 
 Final version!
 
 ![](./screenshot.png)
 
-### Links(QRCODE)
+### Links QRCode
 
-- Solution URL: [Add solution URL here](https://github.com/amorabot/web-dev)
-- Live Site URL: [Add live site URL here](https://amorabot.vercel.app/)
+- Solution URL: [Github repository](https://github.com/amorabot/web-dev)
+- Live Site URL: [Deployed app URL](https://amorabot.vercel.app/)
 
-## My process(QRCODE)
+## My process QRCode
 
-### Built with(QRCODE)
+### Built with QRCode
 
 - HTML5
 - CSS
 - Flexbox basics
 - Grid basics
 
-### What I learned(QRCODE)
+### What I learned QRCode
 
 This project was great for starting to get hands-on experience with the essentials of CSS. It was very useful for getting a better understanding of flex and grid containers, their properties and their child's properties (especially getting a better grasp of grid-template-rows/columns property). It was also great for experimenting with auto and % units for component spacing!
 
@@ -77,7 +77,7 @@ Below are some highlighted code snippets from the main CSS class:
 }
 ```
 
-### Useful resources(QRCODE)
+### Useful resources QRCode
 
 - [MDN Docs - Sizing items](https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/Sizing_items_in_CSS) - Great visual examples of different components needing different treatments for reaching a final goal.
 - [CSS Tricks - Flexbox guide](https://css-tricks.com/snippets/css/a-guide-to-flexbox/#aa-examples) - Godly flexbox demonstrations.

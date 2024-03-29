@@ -25,8 +25,8 @@ Final version!
 
 ### Links
 
-- Solution URL: [Add solution URL here](https://github.com/amorabot/web-dev)
-- Live Site URL: [Add live site URL here](https://amorabot.vercel.app/)
+- Solution URL: [Github repository](https://github.com/amorabot/web-dev)
+- Live Site URL: [Deployed app URL](https://amorabot.vercel.app/)
 
 ## My process
 
