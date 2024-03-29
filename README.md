@@ -35,7 +35,7 @@ This is a solution to the [QR code component challenge on Frontend Mentor](https
 
 Final version!
 
-![](./screenshot.png)
+![](./frontend/challenges/qr-code-component-main/screenshot.png)
 
 ### Links QRCode
 
