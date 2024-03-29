@@ -1,0 +1,79 @@
+:root{
+    --white: hsl(0, 0%, 100%);
+    --light-gray: hsl(212, 45%, 89%);
+    --grayish-blue: hsl(220, 15%, 55%);
+    --dark-blue: hsl(218, 44%, 22%);
+}
+
+* {
+    min-width: 0;
+}
+body{
+    margin: 0;
+    padding: 0;
+}
+img{
+    display: block;
+    max-width: 100%;
+}
+
+.attribution { font-size: 11px; text-align: center; padding: 10px;}
+.attribution a { color: hsl(228, 45%, 44%); }
+
+#app{
+    padding: 0;
+    width: 0;
+    min-height: 95vh;
+    width: auto;
+    display: flex;
+    justify-content: center;
+    background-color: var(--light-gray);
+}
+
+
+#qr-code-data{
+    display: grid;
+    grid-template-rows: max-content min-content min-content;
+
+    align-self: center;
+
+    background-color: var(--white);
+    padding: 14px;
+    margin-inline: 10px;
+    border-radius: 5%;
+    max-width: 270px;
+    min-height: 450px;
+}
+
+.qr-code-image{
+    object-fit: cover;
+    max-width: 100%;
+    border-radius: 4%;
+}
+.qr-code-header{
+    color: var(--dark-blue);
+    font-family: Outfit,sans-serif;
+    font-weight: 700;
+    font-size: 21px;
+    text-align: center;
+    /* Shorthand for left and right */
+    padding-inline: 5%;
+    padding-top: 9%;
+}
+.qr-code-description{
+    color: var(--grayish-blue);
+    font-family: Outfit,sans-serif;
+    font-weight: 400;
+    font-size: 15px;
+    text-align: center;
+    padding-inline: 5%;
+    padding-top: 8%;
+    padding-bottom: 12%;
+}
+
+@media (width <=320px){
+    #qr-code-data{
+        padding: 5%;
+        max-width: 80%;
+    }
+}
