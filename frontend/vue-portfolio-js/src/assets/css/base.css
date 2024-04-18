@@ -1,0 +1,9 @@
+/* color palette from <https://github.com/vuejs/theme> */
+:root {
+  --main-color: hsl(71, 100%, 39%);
+  --darker: hsl(71, 58%, 31%);
+  --darker-shade: hsl(73, 34%, 24%);
+  --main-purple: #4831d4;
+  /* --darker: #804ab3;
+  --darker-shade: #3a3079; */
+}
