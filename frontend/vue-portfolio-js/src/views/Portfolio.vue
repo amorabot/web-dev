@@ -1,13 +1,21 @@
 <script setup>
   import HeroSection from '../components/HeroSection.vue';
-  import AboutPointer from '../components/AboutPointer.vue';
   import Navbar from '@/components/Navbar.vue';
-  import Typewriter from '@/components/Typewriter.vue';
+  import AboutSection from '@/components/AboutSection.vue';
 </script>
 
 <template>
     <Navbar/>
     <HeroSection/>
-    <AboutPointer/>
+    <AboutSection/>
+    <div id="dummyspacediv">
+
+    </div>
     <!-- <Typewriter/> -->
 </template>
+
+<style scoped>
+  #dummyspacediv{
+    height: 30vh;
+  }
+</style>

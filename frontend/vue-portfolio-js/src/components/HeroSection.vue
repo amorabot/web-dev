@@ -13,7 +13,7 @@
         </span>
         <p class="ibm-plex-mono">
             Sou desenvolvedor back-end e engenheiro de software, pensando
-            sempre em escalabilidade. No tempo livre? Sou game designer/dev!
+            sempre em qualidade e escalabilidade. No tempo livre? Sou game designer/dev!
             <br/>
             <br/>
             Busco trazer para os projetos a minha paixão por fazer coisas que geram impacto! 
@@ -38,7 +38,8 @@
         width: 100%;
         height: 100%;
 
-        border-bottom: 11px solid var(--darker);
+        /* background-color: ; */
+        /* border-bottom: 11px solid var(--darker); */
     }
     #hero-left{
         display: flex;
@@ -49,23 +50,23 @@
     #hero-text-container{
         color: var(--darker);
         padding-top: 15%;
-        margin-left: 3rem;
+        margin-left: 15%;
         display: flex;
         flex-direction: column;
         align-self: center;
     }
     #hero-left span{
-        font-size: 4.5vw;
-        line-height: 4.2vw;
+        font-size: max(38px, 4vw);
+        line-height: max(42px, 4.2vw);
         margin-top: 0;
         margin-bottom: 5%;
         margin-right: 30%;
         align-self: start;
     }
     #hero-left p{
-        font-size: 1.2vw;
-        line-height: 1.5vw;
-        margin-right: 25%;
+        font-size: max(14px, 1.2vw);
+        line-height: max(16px, 1.4vw);
+        margin-right: 20%;
         margin-block: 0;
     }
     /* @media (800px < width < 1200px) {
