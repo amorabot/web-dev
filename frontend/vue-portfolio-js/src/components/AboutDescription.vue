@@ -1,5 +1,5 @@
 <template>
-    <div id="about-description">
+    <!-- <div id="about-description">
         <div id="description-length-selector" class="inter-body">
             <span>Descrição: </span>
             <button>
@@ -24,38 +24,33 @@
             <br>
             Abaixo você pode ver algumas das minhas habilidades práticas, assim como principais ferramentas e linguagens que utilizo!<br>
         </h3>
-    </div>
+    </div> -->
 </template>
 
 <style scoped>
-    #about-description{
+    /* #about-description{
         width: 40%;
         padding-top: 2rem;
         padding-left: 10rem;
 
         font-size: 1rem;
         line-height: 26px;
-        /* color: #c3c2c4; */
         color: #c3c2c4;
         line-break: strict;
-    }
-    #description-length-selector{
+    } */
+    /* #description-length-selector{
         padding-left: 15px;
         padding-block: 10px;
         background-color: var(--secondary-shade);
-        /* background-color: var(--darker-shade); */
 
         border-radius: 10px 10px 0 0;
-    }
-    h3{
+    } */
+    /* h3{
         margin-top: 0.5rem;
         padding-block: 1rem;
         padding-left: 2rem;
         padding-right: 1rem;
 
         background-color: var(--secondary-shade);
-        /* background-color: var(--darker-shade); */
-
-        /* border-radius: 10px; */
-    }
+    } */
 </style>

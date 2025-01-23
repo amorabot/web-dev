@@ -11,8 +11,9 @@ let perlinSketch = function(p5){
 
   p5.windowResized = function(){
     let canvasContainer = document.getElementById(parentID);
+    const dimentions = canvasContainer.getBoundingClientRect()
     // p5.resizeCanvas(canvasContainer.offsetWidth, canvasContainer.offsetHeight);
-    p5.resizeCanvas((p5.windowWidth * 0.4) - 11, p5.windowHeight * 0.8);
+    p5.resizeCanvas(dimentions.width-11, dimentions.height);
   }
 
   p5.mouseClicked = function (){
@@ -20,7 +21,11 @@ let perlinSketch = function(p5){
   }
 
   p5.setup = function() {
-    cnv = p5.createCanvas((p5.windowWidth * 0.4) - 11, p5.windowHeight * 0.8);
+    let canvasContainer = document.getElementById(parentID);
+    const dimentions = canvasContainer.getBoundingClientRect()
+
+    cnv = p5.createCanvas(dimentions.width-11, dimentions.height);
+    // cnv = p5.createCanvas((p5.windowWidth * 0.4) - 11, p5.windowHeight * 0.8);
     cnv.id(canvasID);
     // const sketchCanvas = document.getElementById("defaultCanvas0");
     p5.frameRate(24);

@@ -12,8 +12,10 @@
             Engenheiro<br/>Back-end
         </span>
         <p class="ibm-plex-mono">
-            Sou desenvolvedor back-end e engenheiro de software, pensando
-            sempre em qualidade e escalabilidade. No tempo livre? Sou game designer/dev!
+            Sou desenvolvedor software há mais de 3 anos e me especializo em sistemas back-end.
+            <br/>
+            <br/>
+            Também sou um grande entusiasta de jogos e cultura digital, sendo game developer e designer no tempo livre!
             <br/>
             <br/>
             Busco trazer para os projetos a minha paixão por fazer coisas que geram impacto! 
@@ -49,7 +51,7 @@
     }
     #hero-text-container{
         color: var(--darker);
-        padding-top: 15%;
+        padding-top: 12%;
         margin-left: 15%;
         display: flex;
         flex-direction: column;
@@ -117,6 +119,6 @@
     #perlin-sketch-container{
         position: absolute;
         width: 50%;
-        height: 80%;
+        height: 100%;
     }
 </style>
