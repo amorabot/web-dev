@@ -105,8 +105,6 @@ const myTechStacks = [
         border-bottom: 10px solid #FFC421;
     }
     #about-content-grid{
-        /* background-color: aquamarine; */
-
         display: grid;
         grid-template-columns: max-content 50vw;
         grid-template-areas: 
@@ -161,43 +159,9 @@ const myTechStacks = [
 
         color: #968E7F;
     }
-    /* #tech-component{ */
-        
-        /* min-height: 100% */
-    /* } */
 
     .bg-test{
         background-color: darkgray;
     }
-
-    /* #about-typewriter{
-        display: flex;
-        justify-content: center;
-
-        font-size: 1rem;
-        color: var(--secondary);
-        align-self: center;
-    } */
-
-    /* #about-heading{
-        width: 100%;
-        height: 3.5rem;
-        text-align: center;
-    } */
-    /* #about-heading span{
-        color: var(--secondary);
-        font-size: 3rem;
-
-    } */
-    /* #about-heading span:nth-child(1){
-        translate: 0px 8px;
-    } */
-
-    /* #about-content{
-        display: flex;
-        margin-top: 5rem;
-        justify-content: center;
-
-    } */
 
 </style>

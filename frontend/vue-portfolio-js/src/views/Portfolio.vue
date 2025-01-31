@@ -4,6 +4,7 @@
   import Navbar from '@/components/Navbar.vue';
   import AboutSection from '@/components/about/AboutSection.vue';
   import WelcomeTransition from '@/components/transtitions/WelcomeTransition.vue';
+  import ProjectsSection from '@/components/projects/ProjectsSection.vue';
 
   // const currentTransition = "Welcome"
 
@@ -16,6 +17,7 @@
     <Navbar/>
     <HeroSection/>
     <AboutSection/>
+    <ProjectsSection/>
     <!-- <Typewriter/> -->
 </template>
 

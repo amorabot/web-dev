@@ -4,7 +4,6 @@ const props = defineProps({
   svgSource: String
 });
 
-// alert(props.svgSource)
 </script>
 
 
