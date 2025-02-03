@@ -5,6 +5,7 @@
   import AboutSection from '@/components/about/AboutSection.vue';
   import WelcomeTransition from '@/components/transtitions/WelcomeTransition.vue';
   import ProjectsSection from '@/components/projects/ProjectsSection.vue';
+import PlaygroundSection from '@/components/playground/PlaygroundSection.vue';
 
   // const currentTransition = "Welcome"
 
@@ -18,6 +19,7 @@
     <HeroSection/>
     <AboutSection/>
     <ProjectsSection/>
+    <PlaygroundSection/>
     <!-- <Typewriter/> -->
 </template>
 
