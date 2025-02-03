@@ -6,7 +6,7 @@
 
     <div id="playground" class="league-spartan-header">
         <div id="playground-heading">
-            <img src="/src/assets/gifs/spin.gif"><span>Meu playground na web!</span><img src="/src/assets/gifs/rodando.gif">
+            <img src="/assets/gifs/spin.gif"><span>Meu playground na web!</span><img src="/assets/gifs/rodando.gif">
         </div>
         <p>
             Aqui você vai poder encontrar meu lado criativo e algumas das coisas legais que tenho pra mostrar na web!<br>

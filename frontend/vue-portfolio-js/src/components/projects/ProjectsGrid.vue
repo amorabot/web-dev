@@ -1,10 +1,10 @@
 <script setup>
 import ProjectCard from './ProjectCard.vue';
-import inscriptedImg from '@/assets/images/inscriptedbanner.png'
-import replantImg from '@/assets/images/replantinho.png'
-import fontspopuliImg from '@/assets/images/tracy.png'
-import whaleImg from '@/assets/images/whale.png'
-import crusadeImg from '@/assets/images/crusade.png'
+import inscriptedImg from '/assets/images/inscriptedbanner.png'
+import replantImg from '/assets/images/replantinho.png'
+import fontspopuliImg from '/assets/images/tracy.png'
+import whaleImg from '/assets/images/whale.png'
+import crusadeImg from '/assets/images/crusade.png'
 
 const projectsData = [
     {

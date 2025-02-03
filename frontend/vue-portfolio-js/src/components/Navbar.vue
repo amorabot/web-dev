@@ -29,7 +29,7 @@ const buttonData = [
 
 <template>
     <div id="main-navbar">
-        <img src="@/assets/images/grapes-export.png" width="50" height="50">
+        <img src="/assets/images/grapes-export.png" width="50" height="50">
         <nav id="navbar-list">
             <span class="navbar-item league-spartan-header">daniel amorim</span>
             <nav-button
@@ -39,7 +39,7 @@ const buttonData = [
             :display-name="button.displayName"
             ></nav-button>
             <div class="league-spartan-header">
-                <a id="button-cv" target="_blank" href="/src/assets/CV_Daniel.pdf"> 
+                <a id="button-cv" target="_blank" href="/assets/CV_Daniel.pdf"> 
                     <span class="material-symbols-outlined nav-icon">download</span>Currículo
                 </a>
             </div>

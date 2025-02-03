@@ -1,4 +1,4 @@
-@import './base.css';
+@import '/assets/css/base.css';
 
 *{
   min-width: 0;
@@ -62,11 +62,11 @@ img{
 
 @font-face {
   font-family: ThunderSemibold;
-  src: url(../fonts/Thunder-SemiBoldHC.ttf);
+  src: url(/assets/fonts/Thunder-SemiBoldHC.ttf);
 }
 @font-face {
   font-family: ThunderLight;
-  src: url(../fonts/Thunder-LightHC.ttf);
+  src: url(/assets/fonts/Thunder-LightHC.ttf);
 }
 
 

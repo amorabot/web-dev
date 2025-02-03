@@ -14,7 +14,7 @@ const props = defineProps({
         <div class="card-text">
             <div id="name">
                 <span>{{ projectName }}</span>
-                <a :href="link"><img src="/src/assets/images/share.png"></a>
+                <a :href="link"><img src="/assets/images/share.png"></a>
             </div>
             
             <p>{{ description }}</p>

@@ -1,14 +1,14 @@
 <script setup>
 import TechComponent from './TechComponent.vue';
 
-import javaSvg from "@/assets/svgs/techIcons/java.svg"
-import dockerSvg from "@/assets/svgs/techIcons/docker.svg"
-import flaskSvg from "@/assets/svgs/techIcons/flask.svg"
-import githubSvg from "@/assets/svgs/techIcons/github.svg"
-import linuxSvg from "@/assets/svgs/techIcons/linux.svg"
-import pythonSvg from "@/assets/svgs/techIcons/python.svg"
-import springSvg from "@/assets/svgs/techIcons/spring.svg"
-import vueSvg from "@/assets/svgs/techIcons/vue.svg"
+import javaSvg from "/assets/svgs/techIcons/java.svg"
+import dockerSvg from "/assets/svgs/techIcons/docker.svg"
+import flaskSvg from "/assets/svgs/techIcons/flask.svg"
+import githubSvg from "/assets/svgs/techIcons/github.svg"
+import linuxSvg from "/assets/svgs/techIcons/linux.svg"
+import pythonSvg from "/assets/svgs/techIcons/python.svg"
+import springSvg from "/assets/svgs/techIcons/spring.svg"
+import vueSvg from "/assets/svgs/techIcons/vue.svg"
 
 const myTechStacks = [
     {name: "Java", icon: javaSvg},
@@ -29,7 +29,7 @@ const myTechStacks = [
                 <h1 class="" style="font-family: ThunderSemibold; ">SOBRE</h1><br>
                 <h1 class="" style="position: relative; top: -60px; font-family: ThunderLight;">MIM</h1>
             </div>
-            <img id="about-img" src="@/assets/images/profilepixel.png" >
+            <img id="about-img" src="/assets/images/profilepixel.png" >
 
             <div id="about-content">
                 <div id="about-description" class="ubuntu-mono-regular">

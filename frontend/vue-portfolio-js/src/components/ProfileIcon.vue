@@ -3,14 +3,14 @@
   <div id="profile-pic-container">
 
     <span class="ascii topleft ubuntu-mono-regular">##%//-!/</span>
-    <img alt="A ASCII Logo for 'amorabot'" class="logo" src="@/assets/svgs/logoASCII.svg" />
+    <img alt="A ASCII Logo for 'amorabot'" class="logo" src="/assets/svgs/logoASCII.svg" />
     <span class="ascii topright ubuntu-mono-regular">/=/{!}##</span>
 
     <span class="ascii left ubuntu-mono-regular">######=#====!!!!|<br/>.<br/><br/>.</span>
 
     <div class="figure">
-      <img src="../assets/images/profilehome.png" id="profile-pic"/>
-      <img src="../assets/images/handsomeASCII.png" id="ascii-profile-pic"/>
+      <img src="/assets/images/profilehome.png" id="profile-pic"/>
+      <img src="/assets/images/handsomeASCII.png" id="ascii-profile-pic"/>
     </div>
 
     <span class="ascii right ubuntu-mono-regular">######=#====!!!!|<br/>.<br/><br/>.</span>
@@ -86,28 +86,4 @@
     justify-self: stretch;
     text-align: center;
   }
-
-
-  /* .figure{
-    grid-area: pic;
-    position: relative;
-    max-width: 100%;
-
-  }
-  #profile-pic{
-    opacity: 1;
-  }
-  .figure #ascii-profile-pic{
-    position: absolute;
-    top: 0;
-    right: 0;
-    left: 0;
-    bottom: 0;
-    object-fit: contain;
-    opacity: 0;
-    transition: opacity .2s;
-  }
-  .figure:hover #ascii-profile-pic{
-    opacity: 1;
-  } */
 </style>

@@ -1,0 +1,11 @@
+:root {
+  --darker: hsl(71, 58%, 31%);
+  --darker-shade: hsl(73, 34%, 24%);
+  --darkest: #333918;
+
+  --bg-secondary: #f9edc8;
+
+  --secondary: #29214F;
+  --secondary-shade: #151320;
+
+}
