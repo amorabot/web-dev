@@ -1,31 +1,45 @@
+<script setup>
+import NavButton from './navbar/NavButton.vue';
+
+
+
+const buttonData = [
+    {
+        targetContainerSelector: "#hero",
+        iconName: "home",
+        displayName: "Home"
+    },
+    {
+        targetContainerSelector: "#about-container",
+        iconName: "stylus_note",
+        displayName: "Sobre"
+    },
+    {
+        targetContainerSelector: "#projects-container",
+        iconName: "star",
+        displayName: "Projetos"
+    },
+    {
+        targetContainerSelector: "#playground",
+        iconName: "music_note",
+        displayName: "Playground"
+    }
+]
+</script>
+
 <template>
     <div id="main-navbar">
         <img src="@/assets/images/grapes-export.png" width="50" height="50">
         <nav id="navbar-list">
             <span class="navbar-item league-spartan-header">daniel amorim</span>
-            <span class="navbar-item league-spartan-header">
-                <a href="#hero">
-                    <span class="material-symbols-outlined nav-icon">home</span>Home
-                </a>
-            </span>
-            <span class="navbar-item league-spartan-header">
-                <a href="#about-container">
-                    <span class="material-symbols-outlined nav-icon">stylus_note</span>Sobre
-                </a>
-            </span>
-            <span class="navbar-item league-spartan-header">
-                <a href="#projects">
-                    <span class="material-symbols-outlined nav-icon">star</span>Projetos
-                </a>
-            </span>
-            <span class="navbar-item league-spartan-header">
-                <a href="#playground">
-                    <span class="material-symbols-outlined nav-icon">music_note</span>Playground
-                </a>
-            </span>
+            <nav-button
+            v-for="button in buttonData"
+            :target-container-selector="button.targetContainerSelector"
+            :icon-name="button.iconName"
+            :display-name="button.displayName"
+            ></nav-button>
             <div class="league-spartan-header">
-                <!-- download="" target="_blank" href="../assets/CV_Daniel_Amorim_FULLSTACK_XMOBOTS.pdf" -->
-                <a id="button-cv" target="_blank" href=""> 
+                <a id="button-cv" target="_blank" href="/src/assets/CV_Daniel.pdf"> 
                     <span class="material-symbols-outlined nav-icon">download</span>Currículo
                 </a>
             </div>
@@ -40,8 +54,10 @@
         padding: 15px 25px 10px 15px;
         border-radius: 35px;
         text-decoration: none;
+
+        margin-left: 1.5rem;
     }
-    a{
+    .navbar-item{
         font-size: 20px;
     }
     img{
@@ -68,10 +84,11 @@
     }
 
     #navbar-list{
-        width: 900px;
+        /* max-width: 1200px; */
+        width: 950px;
         background-color: var(--darker);
-        /* border-radius: 0 0 20px 20px; */
         border-radius: 30px;
+        border: 3px solid var(--darker-shade);
         display: grid;
         grid-template-columns: 250px auto auto auto auto auto;
         grid-template-rows: 60px;
@@ -92,9 +109,9 @@
         margin-left: 1rem;
         margin-top: 5px;
     }
-    .navbar-item:nth-child(5) {
-        margin-right: 1.5rem;
-    }
+    /* #navbar-list:nth-child(5) {
+        margin-right: 20rem;
+    } */
 
     a:link{
         color: #FFF;

@@ -73,10 +73,14 @@
 
 
     #terminal-container{
-        width: 60%;
+        width: 55%;
 
-        margin-top: 5vh;
+        margin-top: 15vh;
         margin-bottom: 5vh;
+
+        z-index: 89;
+
+        box-shadow: 10px 13px 6px #3f3d3d;
     }
     #terminal-header{
         display: flex;
@@ -107,6 +111,7 @@
     #projects-ascii{
         width: 100%;
         height: fit-content;
+        margin-left: 25%;
     }
 
     ul.butau{

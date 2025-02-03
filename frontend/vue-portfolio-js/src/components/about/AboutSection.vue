@@ -59,25 +59,6 @@ const myTechStacks = [
             </div>
         </div>
     </div>
-
-    <!-- <div id="about-container">
-        <AboutPointer/>
-        <div id="about-heading">
-        <span class="league-spartan-header">
-            <span class="material-symbols-outlined">stylus_note</span> Sobre mim
-        </span>
-        </div>
-
-        <div id="about-typewriter">
-            <Typewriter class="ibm-plex-mono"/>
-        </div>
-
-        <div id="about-content">
-            <AboutImageDisplay/>
-            <AboutDescription/>
-        </div>
-
-    </div> -->
 </template>
 
 <style scoped>
