@@ -23,8 +23,8 @@ let dvdSketch = function(p5){
     p5.preload = function(){
         console.log("loading shader")
         asciiShader = p5.loadShader(
-            "/src/scripts/shaderDemo/shader.vert",
-            "/src/scripts/shaderDemo/ascii.frag",
+            "/public/scripts/shaderDemo/shader.vert",
+            "/public/scripts/shaderDemo/ascii.frag",
             (loadedShader)=>{
                 console.log("Loaded p5.js shaders")
             },
