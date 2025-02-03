@@ -114,7 +114,7 @@ const buttonData = [
     } */
 
     a:link{
-        color: #FFF;
+        color: var(--darker);
     }
     a:visited{
         color: var(--darker-shade);
