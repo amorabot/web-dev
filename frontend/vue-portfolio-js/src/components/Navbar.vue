@@ -1,7 +1,6 @@
 <script setup>
+import { computed, ref } from 'vue';
 import NavButton from './navbar/NavButton.vue';
-
-
 
 const buttonData = [
     {
@@ -24,99 +23,185 @@ const buttonData = [
         iconName: "music_note",
         displayName: "Playground"
     }
-]
+];
+
+const isMenuOpen = ref(false);
+const menuIcon = computed(() => isMenuOpen.value ? "close" : "menu");
+
+function toggleMenu() {
+    isMenuOpen.value = !isMenuOpen.value;
+}
+
+function closeMenu() {
+    isMenuOpen.value = false;
+}
 </script>
 
 <template>
-    <div id="main-navbar">
-        <img src="/assets/images/grapes-export.png" width="50" height="50">
-        <nav id="navbar-list">
-            <span class="navbar-item league-spartan-header">daniel amorim</span>
-            <nav-button
-            v-for="button in buttonData"
-            :target-container-selector="button.targetContainerSelector"
-            :icon-name="button.iconName"
-            :display-name="button.displayName"
-            ></nav-button>
-            <div class="league-spartan-header">
-                <a id="button-cv" target="_blank" href="/assets/CV_Daniel.pdf"> 
-                    <span class="material-symbols-outlined nav-icon">download</span>Currículo
-                </a>
-            </div>
+    <header class="navbar-wrapper">
+        <nav class="navbar">
+            <a href="#hero" class="brand league-spartan-header" @click="closeMenu">
+                <img src="/assets/images/grapes-export.png" width="48" height="48" alt="Logo">
+                <span>daniel amorim</span>
+            </a>
+            <button
+                class="menu-toggle"
+                type="button"
+                @click="toggleMenu"
+                :aria-expanded="isMenuOpen"
+                aria-label="Alternar navegação"
+            >
+                <span class="material-symbols-outlined">{{ menuIcon }}</span>
+            </button>
+            <ul class="nav-links" :class="{ 'is-open': isMenuOpen }">
+                <li v-for="button in buttonData" :key="button.targetContainerSelector">
+                    <nav-button
+                        :target-container-selector="button.targetContainerSelector"
+                        :icon-name="button.iconName"
+                        :display-name="button.displayName"
+                        @clicked="closeMenu"
+                    />
+                </li>
+                <li>
+                    <a class="cv-link league-spartan-header" target="_blank" href="/assets/CV_Daniel.pdf">
+                        <span class="material-symbols-outlined">download</span>
+                        Currículo
+                    </a>
+                </li>
+            </ul>
         </nav>
-    </div>
-    
+    </header>
 </template>
 
 <style scoped>
-    #button-cv{
-        background-color: #FFF;
-        padding: 15px 25px 10px 15px;
-        border-radius: 35px;
-        text-decoration: none;
+.navbar-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 0.75rem 0;
+    z-index: 1000;
+    pointer-events: none;
+}
 
-        margin-left: 1.5rem;
-    }
-    .navbar-item{
-        font-size: 20px;
-    }
-    img{
-        margin-top: 0px;
-        margin-right: 12px;
-    }
-    .nav-icon{
-        translate: 0 4px;
-        margin-right: 4px;
-    }
-    #main-navbar{
-        display: flex;
-        align-items: center;
-        justify-content: center;
+.navbar {
+    pointer-events: auto;
+    width: min(1100px, calc(100% - 2rem));
+    max-width: 1100px;
+    box-sizing: border-box;
+    margin: 0 auto;
+    background: var(--darker);
+    border: 2px solid var(--darker-shade);
+    border-radius: 999px;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.35rem 1.5rem;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
 
-        /* border-top: 11px solid var(--darker); */
+.brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #fff;
+    text-decoration: none;
+    font-size: 1.3rem;
+    letter-spacing: 0.05em;
+}
 
-        position:fixed;
-        width: 100%;
-        top: 3%;
-        left: 0;
+.brand img {
+    display: block;
+}
 
-        z-index: 999;
-    }
+.menu-toggle {
+    display: none;
+    margin-left: auto;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    background: transparent;
+    border-radius: 999px;
+    color: #fff;
+    padding: 0.35rem 0.6rem;
+    cursor: pointer;
+}
 
-    #navbar-list{
-        /* max-width: 1200px; */
-        width: 950px;
-        background-color: var(--darker);
+.menu-toggle .material-symbols-outlined {
+    font-size: 1.8rem;
+}
+
+.nav-links {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-left: auto;
+}
+
+.nav-links li {
+    display: flex;
+}
+
+.cv-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.55rem 1rem;
+    border-radius: 999px;
+    background: #fff;
+    color: var(--darker);
+    text-decoration: none;
+    font-size: 0.95rem;
+    transition: transform 0.2s ease, background 0.2s ease, color 0.2s ease;
+}
+
+.cv-link:hover {
+    transform: translateY(-1px);
+    background: var(--darker-shade);
+    color: #fff;
+}
+
+@media (max-width: 900px) {
+    .navbar {
         border-radius: 30px;
-        border: 3px solid var(--darker-shade);
-        display: grid;
-        grid-template-columns: 250px auto auto auto auto auto;
-        grid-template-rows: 60px;
-        align-items: center;
-        justify-items: center;
-
-        
-        padding: 5px 0px 8px 0px;
-        padding-inline: 20px;
-
-        color: #FFF;
-
     }
-    .navbar-item:nth-child(1) {
-        font-size: 2rem;
-        justify-self: start;
-        align-self: center;
-        margin-left: 1rem;
-        margin-top: 5px;
-    }
-    /* #navbar-list:nth-child(5) {
-        margin-right: 20rem;
-    } */
+}
 
-    a:link{
-        color: var(--darker);
+@media (max-width: 768px) {
+    .navbar {
+        flex-wrap: wrap;
+        padding: 0.75rem 1.25rem;
+        width: calc(100% - 2rem);
     }
-    a:visited{
-        color: var(--darker-shade);
+
+    .menu-toggle {
+        display: inline-flex;
     }
+
+    .nav-links {
+        width: 100%;
+        flex-direction: column;
+        align-items: stretch;
+        margin: 0;
+        padding-top: 0.75rem;
+        border-top: 1px solid rgba(255, 255, 255, 0.15);
+        display: none;
+    }
+
+    .nav-links.is-open {
+        display: flex;
+    }
+
+    .nav-links li {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .cv-link {
+        justify-content: center;
+    }
+}
 </style>

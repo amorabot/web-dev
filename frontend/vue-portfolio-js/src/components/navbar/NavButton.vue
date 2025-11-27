@@ -1,10 +1,8 @@
 <script setup>
-
 function smoothScrollTo(containerSelector){
-    const element = document.querySelector(containerSelector).scrollIntoView({
+    document.querySelector(containerSelector)?.scrollIntoView({
         behavior: 'smooth'
     });
-    console.log(containerSelector)
 }
 
 const props = defineProps({
@@ -12,48 +10,73 @@ const props = defineProps({
     iconName: String,
     displayName: String
 });
+
+const emit = defineEmits(['clicked']);
+
+function handleClick() {
+    smoothScrollTo(props.targetContainerSelector);
+    emit('clicked');
+}
 </script>
 
 <template>
-    <span @click="smoothScrollTo(props.targetContainerSelector)" class="">
-        <button class="league-spartan-header"><span class="material-symbols-outlined nav-icon">{{iconName}}</span><span class="icon-name">{{displayName}}</span></button>
-    </span>
+    <button class="nav-button league-spartan-header" type="button" @click="handleClick">
+        <span class="material-symbols-outlined nav-icon">{{ iconName }}</span>
+        <span class="icon-name">{{ displayName }}</span>
+    </button>
 </template>
 
 <style scoped>
-    button{
-        color: #FFF;
-        display: flex;
-        text-align: end;
-        font-size: 20px;
+.nav-button {
+    color: #fff;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-size: 1.05rem;
+    background: transparent;
+    cursor: pointer;
+    padding: 0.45rem 0.9rem;
+    border-radius: 999px;
+    border: 1px solid transparent;
+    transition: background 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
+}
+
+.nav-button:hover,
+.nav-button:focus-visible {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.4);
+    transform: translateY(-1px);
+}
+
+.nav-icon {
+    font-size: 1.35rem;
+}
+
+.icon-name {
+    letter-spacing: 0.05em;
+}
+
+@media (max-width: 1000px) {
+    .icon-name {
+        display: none;
+    }
+
+    .nav-button {
+        background: rgba(0, 0, 0, 0.15);
+        border-color: rgba(255, 255, 255, 0.25);
+    }
+}
+
+@media (max-width: 768px) {
+    .icon-name {
+        display: inline;
+    }
+
+    .nav-button {
+        width: 100%;
+        justify-content: center;
         background: transparent;
-
-        cursor:pointer;
-        padding: 5px 10px 5px 7px;
-        margin-inline: 5px;
-        border-radius: 10px;
-        border-bottom: 3px solid #fff;
-
-        margin-top: 5px;
+        border-color: transparent;
     }
-    .nav-icon{
-        margin-right: 4px;
-    }
-    .icon-name{
-        translate: 0 3px;
-    }
-
-    @media (max-width: 1000px) {
-        .icon-name{
-            display: none;
-        }
-        .nav-icon{
-            margin: 0px;
-            justify-self: center;
-        }
-        button{
-            margin-inline: 0px;
-        }
-    }
-
+}
 </style>
