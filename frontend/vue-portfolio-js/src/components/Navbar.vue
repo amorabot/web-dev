@@ -1,6 +1,6 @@
 <script setup>
-import { computed, ref } from 'vue';
 import NavButton from './navbar/NavButton.vue';
+import { Button } from '@/components/ui/button';
 
 const buttonData = [
     {
@@ -24,56 +24,44 @@ const buttonData = [
         displayName: "Playground"
     }
 ];
-
-const isMenuOpen = ref(false);
-const menuIcon = computed(() => isMenuOpen.value ? "close" : "menu");
-
-function toggleMenu() {
-    isMenuOpen.value = !isMenuOpen.value;
-}
-
-function closeMenu() {
-    isMenuOpen.value = false;
-}
 </script>
 
 <template>
     <header class="navbar-wrapper">
         <nav class="navbar">
-            <a href="#hero" class="brand league-spartan-header" @click="closeMenu">
+            <!-- Brand/Logo -->
+            <a href="#hero" class="brand league-spartan-header">
                 <img src="/assets/images/grapes-export.png" width="48" height="48" alt="Logo">
                 <span>daniel amorim</span>
             </a>
-            <button
-                class="menu-toggle"
-                type="button"
-                @click="toggleMenu"
-                :aria-expanded="isMenuOpen"
-                aria-label="Alternar navegação"
-            >
-                <span class="material-symbols-outlined">{{ menuIcon }}</span>
-            </button>
-            <ul class="nav-links" :class="{ 'is-open': isMenuOpen }">
-                <li v-for="button in buttonData" :key="button.targetContainerSelector">
-                    <nav-button
-                        :target-container-selector="button.targetContainerSelector"
-                        :icon-name="button.iconName"
-                        :display-name="button.displayName"
-                        @clicked="closeMenu"
-                    />
-                </li>
-                <li>
-                    <a class="cv-link league-spartan-header" target="_blank" href="/assets/CV_Daniel.pdf">
-                        <span class="material-symbols-outlined">download</span>
-                        Currículo
-                    </a>
-                </li>
-            </ul>
+
+            <!-- Navigation Links (Always Visible, Compact on Mobile) -->
+            <div class="nav-links">
+                <nav-button
+                    v-for="button in buttonData"
+                    :key="button.targetContainerSelector"
+                    :target-container-selector="button.targetContainerSelector"
+                    :icon-name="button.iconName"
+                    :display-name="button.displayName"
+                />
+                <Button
+                    as="a"
+                    variant="default"
+                    target="_blank"
+                    href="/assets/CV_Daniel.pdf"
+                    class="cv-button league-spartan-header"
+                >
+                    <span class="material-symbols-outlined cv-icon">download</span>
+                    <span class="cv-text">Currículo</span>
+                </Button>
+            </div>
         </nav>
     </header>
 </template>
 
 <style scoped>
+@reference;
+
 .navbar-wrapper {
     position: fixed;
     top: 0;
@@ -81,25 +69,30 @@ function closeMenu() {
     width: 100%;
     display: flex;
     justify-content: center;
-    padding: 0.75rem 0;
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
     z-index: 1000;
     pointer-events: none;
 }
 
 .navbar {
     pointer-events: auto;
-    width: min(1100px, calc(100% - 2rem));
+    width: 100%;
     max-width: 1100px;
-    box-sizing: border-box;
-    margin: 0 auto;
-    background: var(--darker);
-    border: 2px solid var(--darker-shade);
-    border-radius: 999px;
+    margin-left: auto;
+    margin-right: auto;
     display: flex;
     align-items: center;
-    gap: 1rem;
-    padding: 0.35rem 1.5rem;
+    gap: 0.5rem;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    border-radius: 9999px;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    background: var(--darker);
+    border: 2px solid var(--darker-shade);
+    width: min(1100px, calc(100% - 2rem));
 }
 
 .brand {
@@ -108,60 +101,74 @@ function closeMenu() {
     gap: 0.5rem;
     color: #fff;
     text-decoration: none;
-    font-size: 1.3rem;
-    letter-spacing: 0.05em;
+    font-size: 1.25rem;
+    letter-spacing: 0.025em;
 }
 
 .brand img {
     display: block;
 }
 
-.menu-toggle {
+.brand span {
     display: none;
-    margin-left: auto;
-    border: 2px solid rgba(255, 255, 255, 0.2);
-    background: transparent;
-    border-radius: 999px;
-    color: #fff;
-    padding: 0.35rem 0.6rem;
-    cursor: pointer;
-}
-
-.menu-toggle .material-symbols-outlined {
-    font-size: 1.8rem;
 }
 
 .nav-links {
-    list-style: none;
-    margin: 0;
-    padding: 0;
+    margin-left: auto;
     display: flex;
     align-items: center;
-    gap: 0.5rem;
-    margin-left: auto;
+    gap: 0.35rem;
 }
 
-.nav-links li {
-    display: flex;
-}
-
-.cv-link {
+.cv-button {
     display: inline-flex;
     align-items: center;
     gap: 0.35rem;
-    padding: 0.55rem 1rem;
-    border-radius: 999px;
-    background: #fff;
-    color: var(--darker);
-    text-decoration: none;
-    font-size: 0.95rem;
-    transition: transform 0.2s ease, background 0.2s ease, color 0.2s ease;
+    padding: 0.5rem 0.75rem;
+    border-radius: 9999px;
+    font-size: 0.875rem;
+    transition: all 0.2s;
+    background: #fff !important;
+    color: var(--darker) !important;
+    font-weight: 600;
 }
 
-.cv-link:hover {
-    transform: translateY(-1px);
-    background: var(--darker-shade);
-    color: #fff;
+.cv-button:hover {
+    transform: translateY(-2px);
+    background: #f0f0f0 !important;
+}
+
+.cv-icon {
+    font-size: 1.1rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cv-text {
+    font-size: 0.875rem;
+    letter-spacing: 0.025em;
+}
+
+/* Responsive adjustments */
+@media (min-width: 640px) {
+    .brand span {
+        display: inline;
+    }
+}
+
+@media (min-width: 768px) {
+    .navbar {
+        gap: 0.5rem;
+    }
+
+    .nav-links {
+        gap: 0.5rem;
+    }
+
+    .cv-button {
+        padding: 0.5rem 1rem;
+    }
 }
 
 @media (max-width: 900px) {
@@ -170,38 +177,33 @@ function closeMenu() {
     }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 640px) {
     .navbar {
-        flex-wrap: wrap;
-        padding: 0.75rem 1.25rem;
-        width: calc(100% - 2rem);
+        padding-left: 0.75rem;
+        padding-right: 0.75rem;
+        gap: 0.25rem;
     }
 
-    .menu-toggle {
-        display: inline-flex;
+    .brand img {
+        width: 40px;
+        height: 40px;
     }
 
     .nav-links {
-        width: 100%;
-        flex-direction: column;
-        align-items: stretch;
-        margin: 0;
-        padding-top: 0.75rem;
-        border-top: 1px solid rgba(255, 255, 255, 0.15);
-        display: none;
+        gap: 0.25rem;
     }
 
-    .nav-links.is-open {
-        display: flex;
+    .cv-button {
+        padding: 0.45rem 0.6rem;
+        gap: 0.25rem;
     }
 
-    .nav-links li {
-        width: 100%;
-        justify-content: center;
+    .cv-icon {
+        font-size: 1rem;
     }
 
-    .cv-link {
-        justify-content: center;
+    .cv-text {
+        font-size: 0.8rem;
     }
 }
 </style>

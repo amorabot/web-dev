@@ -1,4 +1,6 @@
 <script setup>
+import { Button } from '@/components/ui/button';
+
 function smoothScrollTo(containerSelector){
     document.querySelector(containerSelector)?.scrollIntoView({
         behavior: 'smooth'
@@ -20,63 +22,101 @@ function handleClick() {
 </script>
 
 <template>
-    <button class="nav-button league-spartan-header" type="button" @click="handleClick">
+    <Button
+        variant="ghost"
+        class="nav-button league-spartan-header"
+        @click="handleClick"
+    >
         <span class="material-symbols-outlined nav-icon">{{ iconName }}</span>
         <span class="icon-name">{{ displayName }}</span>
-    </button>
+    </Button>
 </template>
 
 <style scoped>
+@reference;
+
 .nav-button {
-    color: #fff;
     display: inline-flex;
     align-items: center;
+    justify-content: center;
     gap: 0.35rem;
-    font-size: 1.05rem;
-    background: transparent;
-    cursor: pointer;
-    padding: 0.45rem 0.9rem;
-    border-radius: 999px;
+    padding: 0.5rem 0.85rem;
+    border-radius: 9999px;
     border: 1px solid transparent;
-    transition: background 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
+    transition: all 0.2s;
+    color: #fff !important;
+    background: transparent !important;
+    font-size: 0.95rem;
 }
 
 .nav-button:hover,
 .nav-button:focus-visible {
-    background: rgba(255, 255, 255, 0.1);
-    border-color: rgba(255, 255, 255, 0.4);
-    transform: translateY(-1px);
+    transform: translateY(-2px);
+    background: rgba(255, 255, 255, 0.1) !important;
+    border-color: rgba(255, 255, 255, 0.4) !important;
 }
 
 .nav-icon {
-    font-size: 1.35rem;
+    font-size: 1.2rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .icon-name {
-    letter-spacing: 0.05em;
+    letter-spacing: 0.025em;
+    display: inline-flex;
+    align-items: center;
 }
 
-@media (max-width: 1000px) {
+/* Desktop - show full text */
+@media (min-width: 1025px) {
+    .nav-button {
+        padding: 0.5rem 1rem;
+        font-size: 1rem;
+    }
+
+    .nav-icon {
+        font-size: 1.25rem;
+    }
+}
+
+/* Tablet - icon only with subtle background */
+@media (max-width: 1024px) and (min-width: 769px) {
     .icon-name {
         display: none;
     }
 
     .nav-button {
-        background: rgba(0, 0, 0, 0.15);
-        border-color: rgba(255, 255, 255, 0.25);
+        padding: 0.55rem 1rem;
+        background: rgba(0, 0, 0, 0.15) !important;
+        border-color: rgba(255, 255, 255, 0.2) !important;
+    }
+
+    .nav-button:hover {
+        background: rgba(255, 255, 255, 0.15) !important;
+        border-color: rgba(255, 255, 255, 0.4) !important;
     }
 }
 
+/* Mobile - icon only, more compact but wider */
 @media (max-width: 768px) {
     .icon-name {
-        display: inline;
+        display: none;
     }
 
     .nav-button {
-        width: 100%;
-        justify-content: center;
-        background: transparent;
-        border-color: transparent;
+        padding: 0.5rem 1.05rem;
+        background: rgba(0, 0, 0, 0.15) !important;
+        border-color: rgba(255, 255, 255, 0.2) !important;
+    }
+
+    .nav-icon {
+        font-size: 1.1rem;
+    }
+
+    .nav-button:hover {
+        background: rgba(255, 255, 255, 0.15) !important;
     }
 }
 </style>
