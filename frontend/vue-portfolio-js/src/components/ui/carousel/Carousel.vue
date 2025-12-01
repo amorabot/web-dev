@@ -18,6 +18,8 @@ const props = defineProps({
   }
 })
 
+const emit = defineEmits(['init-api'])
+
 const [emblaNode, emblaApi] = emblaCarouselVue(
   () => ({
     ...props.opts,
@@ -43,6 +45,9 @@ watch(emblaApi, (api) => {
 
   api.on('select', updateScrollState)
   api.on('reInit', updateScrollState)
+
+  // Emit the API instance to parent component
+  emit('init-api', api)
 })
 
 function scrollPrev() {

@@ -2,28 +2,45 @@
 import NavButton from './navbar/NavButton.vue';
 import { Button } from '@/components/ui/button';
 
+const props = defineProps({
+    activeIndex: {
+        type: Number,
+        default: 0
+    }
+});
+
+const emit = defineEmits(['navigate']);
+
 const buttonData = [
     {
         targetContainerSelector: "#hero",
         iconName: "home",
-        displayName: "Home"
+        displayName: "Home",
+        index: 0
     },
     {
         targetContainerSelector: "#about-container",
         iconName: "stylus_note",
-        displayName: "Sobre"
+        displayName: "Sobre",
+        index: 1
     },
     {
         targetContainerSelector: "#projects-container",
         iconName: "star",
-        displayName: "Projetos"
+        displayName: "Projetos",
+        index: 2
     },
     {
         targetContainerSelector: "#playground",
         iconName: "music_note",
-        displayName: "Playground"
+        displayName: "Playground",
+        index: 3
     }
 ];
+
+function handleNavButtonClick(index) {
+    emit('navigate', index);
+}
 </script>
 
 <template>
@@ -43,6 +60,8 @@ const buttonData = [
                     :target-container-selector="button.targetContainerSelector"
                     :icon-name="button.iconName"
                     :display-name="button.displayName"
+                    :is-active="activeIndex === button.index"
+                    @clicked="handleNavButtonClick(button.index)"
                 />
                 <Button
                     as="a"

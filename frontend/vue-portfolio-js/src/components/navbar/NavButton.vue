@@ -10,13 +10,16 @@ function smoothScrollTo(containerSelector){
 const props = defineProps({
     targetContainerSelector: String,
     iconName: String,
-    displayName: String
+    displayName: String,
+    isActive: {
+        type: Boolean,
+        default: false
+    }
 });
 
 const emit = defineEmits(['clicked']);
 
 function handleClick() {
-    smoothScrollTo(props.targetContainerSelector);
     emit('clicked');
 }
 </script>
@@ -24,7 +27,7 @@ function handleClick() {
 <template>
     <Button
         variant="ghost"
-        class="nav-button league-spartan-header"
+        :class="['nav-button league-spartan-header', { 'nav-button-active': isActive }]"
         @click="handleClick"
     >
         <span class="material-symbols-outlined nav-icon">{{ iconName }}</span>
@@ -54,6 +57,12 @@ function handleClick() {
     transform: translateY(-2px);
     background: rgba(255, 255, 255, 0.1) !important;
     border-color: rgba(255, 255, 255, 0.4) !important;
+}
+
+.nav-button-active {
+    background: rgba(255, 255, 255, 0.2) !important;
+    border-color: rgba(255, 255, 255, 0.6) !important;
+    transform: scale(0.95);
 }
 
 .nav-icon {
@@ -97,6 +106,11 @@ function handleClick() {
         background: rgba(255, 255, 255, 0.15) !important;
         border-color: rgba(255, 255, 255, 0.4) !important;
     }
+
+    .nav-button-active {
+        background: rgba(255, 255, 255, 0.25) !important;
+        border-color: rgba(255, 255, 255, 0.7) !important;
+    }
 }
 
 /* Mobile - icon only, more compact but wider */
@@ -117,6 +131,11 @@ function handleClick() {
 
     .nav-button:hover {
         background: rgba(255, 255, 255, 0.15) !important;
+    }
+
+    .nav-button-active {
+        background: rgba(255, 255, 255, 0.25) !important;
+        border-color: rgba(255, 255, 255, 0.7) !important;
     }
 }
 </style>

@@ -1,5 +1,6 @@
 
 <script setup>
+  import { ref } from 'vue';
   import HeroSection from '../components/HeroSection.vue';
   import Navbar from '@/components/Navbar.vue';
   import AboutSection from '@/components/about/AboutSection.vue';
@@ -14,11 +15,32 @@
     CarouselPrevious,
   } from '@/components/ui/carousel';
 
+  const activeCarouselIndex = ref(0);
+  const carouselApi = ref(null);
+
+  function onCarouselInit(api) {
+    carouselApi.value = api;
+
+    if (api) {
+      // Update active index when carousel slides change
+      api.on('select', () => {
+        activeCarouselIndex.value = api.selectedScrollSnap();
+      });
+    }
+  }
+
+  function scrollToIndex(index) {
+    carouselApi.value?.scrollTo(index);
+  }
+
 </script>
 
 <template>
   <WelcomeTransition/>
-  <Navbar/>
+  <Navbar
+    :active-index="activeCarouselIndex"
+    @navigate="scrollToIndex"
+  />
 
   <Carousel
     class="w-full h-screen"
@@ -27,6 +49,7 @@
       loop: false,
       axis: 'x'
     }"
+    @init-api="onCarouselInit"
   >
     <CarouselContent class="h-screen">
       <CarouselItem class="h-screen">
