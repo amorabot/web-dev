@@ -37,8 +37,8 @@
 /* consider using clamp() for fontsize */
     #hero{
         display: flex;
-        width: 100%;
-        height: 100%;
+        width: 100vw;
+        height: 100vh;
 
         /* background-color: ; */
         /* border-bottom: 11px solid var(--darker); */

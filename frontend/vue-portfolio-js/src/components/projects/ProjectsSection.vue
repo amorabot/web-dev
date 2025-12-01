@@ -49,6 +49,9 @@ import TerminalMock from './TerminalMock.vue';
 
 <style scoped>
     #projects-container{
+        width: 100vw;
+        height: 100vh;
+
         display: flex;
         align-items: center;
         justify-content: center;
