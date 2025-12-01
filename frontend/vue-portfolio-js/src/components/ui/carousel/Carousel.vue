@@ -1,5 +1,5 @@
 <script setup>
-import { provide, ref, computed, watch, onMounted } from 'vue'
+import { provide, ref, computed, watch, onMounted, onUnmounted } from 'vue'
 import emblaCarouselVue from 'embla-carousel-vue'
 import { useProvideCarousel } from './useCarousel'
 
@@ -58,6 +58,39 @@ function scrollTo(index) {
 }
 
 const orientation = computed(() => props.orientation)
+
+// Mouse wheel scroll functionality
+const handleWheel = (event) => {
+  if (!emblaApi.value) return
+
+  // Prevent default scroll behavior
+  event.preventDefault()
+
+  // Check scroll direction: positive deltaY means scroll down, negative means scroll up
+  if (event.deltaY > 0) {
+    // Scroll down = next slide (scroll right)
+    if (canScrollNext.value) {
+      scrollNext()
+    }
+  } else if (event.deltaY < 0) {
+    // Scroll up = previous slide (scroll left)
+    if (canScrollPrev.value) {
+      scrollPrev()
+    }
+  }
+}
+
+onMounted(() => {
+  if (emblaNode.value) {
+    emblaNode.value.addEventListener('wheel', handleWheel, { passive: false })
+  }
+})
+
+onUnmounted(() => {
+  if (emblaNode.value) {
+    emblaNode.value.removeEventListener('wheel', handleWheel)
+  }
+})
 
 useProvideCarousel({
   emblaApi,

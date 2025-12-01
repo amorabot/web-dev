@@ -46,8 +46,8 @@
       </CarouselItem>
     </CarouselContent>
 
-    <CarouselPrevious class="left-4" />
-    <CarouselNext class="right-4" />
+    <CarouselPrevious class="left-4 z-10" />
+    <CarouselNext class="right-4 z-10" />
   </Carousel>
 </template>
 
