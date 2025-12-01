@@ -46,12 +46,12 @@ const projectsData = [
 
 <template>
 
-    <div id="projects-header">
+    <div id="projects-header" style="display: none;">
         <span class="">----&nbsp;&nbsp;&nbsp;------&nbsp;----------- ===</span>
         <span id="p-header" style="font-size: 48px;" class="league-spartan-header">Meus projetos</span>
         <span class="">=== -----------&nbsp;------&nbsp;&nbsp;&nbsp;----</span>
     </div>
-    <div id="projects-grid">
+    <div id="projects-grid" style="display: none;">
         <ProjectCard
         v-for="project in projectsData"
         :project-name="project.name"
@@ -60,7 +60,7 @@ const projectsData = [
         :link="project.link"
         />
     </div>
-    <div id="projects-footer"></div>
+    <div id="projects-footer" style="display: none;"></div>
 
 </template>
 
