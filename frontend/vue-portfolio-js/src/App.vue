@@ -1,5 +1,4 @@
-<script setup>
-import { RouterLink, RouterView } from 'vue-router'
+<script setup lang="ts">
 import Portfolio from './views/Portfolio.vue';
 </script>
 

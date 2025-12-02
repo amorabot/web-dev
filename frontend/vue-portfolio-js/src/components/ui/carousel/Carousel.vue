@@ -1,30 +1,30 @@
-<script setup>
-import { provide, ref, computed, watch, onMounted, onUnmounted } from 'vue'
+<script setup lang="ts">
+import { ref, computed, watch, onMounted, onUnmounted } from 'vue'
 import emblaCarouselVue from 'embla-carousel-vue'
+import type { EmblaCarouselType, EmblaOptionsType, EmblaPluginType } from 'embla-carousel'
 import { useProvideCarousel } from './useCarousel'
 
-const props = defineProps({
-  opts: {
-    type: Object,
-    default: () => ({})
-  },
-  plugins: {
-    type: Array,
-    default: () => []
-  },
-  orientation: {
-    type: String,
-    default: 'horizontal'
-  }
+interface Props {
+  opts?: EmblaOptionsType
+  plugins?: EmblaPluginType[]
+  orientation?: 'horizontal' | 'vertical'
+}
+
+const props = withDefaults(defineProps<Props>(), {
+  opts: () => ({}),
+  plugins: () => [],
+  orientation: 'horizontal'
 })
 
-const emit = defineEmits(['init-api'])
+const emit = defineEmits<{
+  'init-api': [api: EmblaCarouselType]
+}>()
 
 const [emblaNode, emblaApi] = emblaCarouselVue(
-  () => ({
+  computed(() => ({
     ...props.opts,
     axis: props.orientation === 'horizontal' ? 'x' : 'y'
-  }),
+  })),
   props.plugins
 )
 
@@ -58,14 +58,14 @@ function scrollNext() {
   emblaApi.value?.scrollNext()
 }
 
-function scrollTo(index) {
+function scrollTo(index: number) {
   emblaApi.value?.scrollTo(index)
 }
 
 const orientation = computed(() => props.orientation)
 
 // Mouse wheel scroll functionality
-const handleWheel = (event) => {
+const handleWheel = (event: WheelEvent) => {
   if (!emblaApi.value) return
 
   // Prevent default scroll behavior
