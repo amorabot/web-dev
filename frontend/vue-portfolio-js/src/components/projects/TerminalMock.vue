@@ -60,8 +60,9 @@
         </div>
 
         <!-- Terminal Content -->
-        <ScrollArea id="terminal-window">
-            <div class="terminal-content">
+        <div id="terminal-window" ref="terminalWindowRef">
+            <ScrollArea class="h-full">
+                <div class="terminal-content">
                 <!-- Command Prompt -->
                 <div id="typewrite-terminal-line">
                     <span class="terminal-user">daniel@portfolio-terminal</span>
@@ -91,17 +92,17 @@
                     </div>
                     <div class="tree-item nested">
                         <span class="tree-branch">├──</span>
-                        <span class="tree-label">Inscripted</span>
+                        <span class="tree-label project-name" data-project="inscripted">Inscripted</span>
                         <span class="tree-description">A custom-made Minecraft mod that adds Action-RPG elements</span>
                     </div>
                     <div class="tree-item nested">
                         <span class="tree-branch">├──</span>
-                        <span class="tree-label">Fontspopuli</span>
+                        <span class="tree-label project-name" data-project="fontspopuli">Fontspopuli</span>
                         <span class="tree-description">A tool/service for typeface designers and researchers</span>
                     </div>
                     <div class="tree-item nested">
                         <span class="tree-branch">└──</span>
-                        <span class="tree-label">Replant</span>
+                        <span class="tree-label project-name" data-project="replant">Replant</span>
                         <span class="tree-description">A webservice that aims to Tamagotchi-fy the home gardening experience</span>
                     </div>
 
@@ -110,12 +111,12 @@
                     </div>
                     <div class="tree-item nested">
                         <span class="tree-branch">├──</span>
-                        <span class="tree-label">Whale Eater</span>
+                        <span class="tree-label project-name" data-project="whale-eater">Whale Eater</span>
                         <span class="tree-description">A puzzle game about whales, gravity and weird perspectives</span>
                     </div>
                     <div class="tree-item nested">
                         <span class="tree-branch">└──</span>
-                        <span class="tree-label">Crusade to Die</span>
+                        <span class="tree-label project-name" data-project="crusade-to-die">Crusade to Die</span>
                         <span class="tree-description">An arcade game where you control a little dice world and the consequences of each die roll</span>
                     </div>
                 </div>
@@ -124,23 +125,23 @@
 
                 <!-- Progress Bar -->
                 <div class="progress-container">
-                    <p class="progress-text">New project's progress (43%)</p>
-                    <div class="progress-bar-wrapper">
-                        <div class="progress-bar" style="width: 43%">
-                            <span class="progress-fill">███████████</span>
-                        </div>
-                        <span class="progress-empty">█████████████████</span>
+                    <div class="progress-line">
+                        <span class="progress-arrow">=></span>
+                        <span class="progress-label">Building new project</span>
+                        <span class="progress-ascii-bar">[=============>           ] 43%</span>
                     </div>
                 </div>
 
                 <!-- Cursor Blinking Effect -->
                 <div class="terminal-cursor">_</div>
-            </div>
-        </ScrollArea>
+                </div>
+            </ScrollArea>
+        </div>
     </div>
 </template>
 
 <script setup>
+import { ref, onMounted } from 'vue'
 import { ScrollArea } from '@/components/ui/scroll-area'
 import { Separator } from '@/components/ui/separator'
 import {
@@ -152,12 +153,23 @@ import {
     MenubarShortcut,
     MenubarTrigger,
 } from '@/components/ui/menubar'
+
+const terminalWindowRef = ref(null)
+
+onMounted(() => {
+    // Prevent wheel events from bubbling to the carousel
+    if (terminalWindowRef.value) {
+        terminalWindowRef.value.addEventListener('wheel', (event) => {
+            event.stopPropagation()
+        }, { passive: false })
+    }
+})
 </script>
 
 <style scoped>
     /* Terminal Container */
     #terminal-container {
-        width: 55%;
+        width: 65%;
         max-width: 900px;
         margin-top: 10vh;
         margin-bottom: 5vh;
@@ -327,10 +339,11 @@ import {
     /* Terminal Window */
     #terminal-window {
         background: #300a24;
-        height: 40vh;
+        height: 60vh;
         color: #ddd;
         font-size: 16px;
         line-height: 1.5;
+        font-family: 'Ubuntu Mono', monospace;
     }
 
     .terminal-content {
@@ -342,7 +355,7 @@ import {
         display: flex;
         align-items: center;
         gap: 0.2rem;
-        margin-bottom: 0.5rem;
+        margin-bottom: 0.25rem;
         flex-wrap: wrap;
     }
 
@@ -382,8 +395,8 @@ import {
     /* ASCII Art */
     #projects-ascii {
         color: #ad7fa8;
-        margin: 0.5rem 0;
-        font-size: 14px;
+        margin: 0.25rem 0;
+        font-size: 16px;
         text-align: center;
         display: flex;
         justify-content: center;
@@ -393,27 +406,27 @@ import {
         margin: 0;
         font-family: 'Ubuntu Mono', monospace;
         display: inline-block;
-        text-align: left;
+        text-align: center;
     }
 
     /* Terminal Output */
     .terminal-output {
-        margin: 0.5rem 0 0.25rem 0;
+        margin: 0.25rem 0;
         color: #ddd;
     }
 
     /* Project Tree */
     .project-tree {
-        margin: 0.5rem 0;
+        margin: 0.25rem 0;
         font-family: 'Ubuntu Mono', monospace;
     }
 
     .tree-item {
         display: flex;
-        align-items: flex-start;
+        align-items: center;
         gap: 0.4rem;
-        margin: 0.15rem 0;
-        line-height: 1.4;
+        margin: 0.1rem 0;
+        line-height: 1.3;
     }
 
     .tree-item.nested {
@@ -424,14 +437,16 @@ import {
         color: #75507b;
         font-weight: bold;
         margin-right: 0.2rem;
+        flex-shrink: 0;
+        align-self: center;
     }
 
     .tree-icon {
-        font-size: 14px;
+        font-size: 16px;
+        font-family: 'Ubuntu Mono', monospace;
     }
 
     .tree-label {
-        color: #8ae234;
         font-weight: 600;
     }
 
@@ -441,45 +456,120 @@ import {
         font-weight: 700;
     }
 
+    .tree-label.project-name {
+        color: #000;
+        cursor: pointer;
+        padding: 0 2px;
+        border-radius: 0;
+        transition: all 0.2s ease;
+        font-weight: 700;
+        display: inline;
+        vertical-align: baseline;
+    }
+
+    /* Project-specific highlight colors */
+    .tree-label.project-name[data-project="inscripted"] {
+        background-color: #ff8c00;
+    }
+
+    .tree-label.project-name[data-project="fontspopuli"] {
+        background-color: #4a90e2;
+    }
+
+    .tree-label.project-name[data-project="replant"] {
+        background-color: #8ae234;
+    }
+
+    .tree-label.project-name[data-project="whale-eater"] {
+        background-color: #e74c3c;
+    }
+
+    .tree-label.project-name[data-project="crusade-to-die"] {
+        background-color: #ffeb3b;
+    }
+
+    /* Hover state - remove background, color becomes the highlight color */
+    .tree-label.project-name[data-project="inscripted"]:hover {
+        background-color: transparent;
+        color: #ff8c00;
+    }
+
+    .tree-label.project-name[data-project="fontspopuli"]:hover {
+        background-color: transparent;
+        color: #4a90e2;
+    }
+
+    .tree-label.project-name[data-project="replant"]:hover {
+        background-color: transparent;
+        color: #8ae234;
+    }
+
+    .tree-label.project-name[data-project="whale-eater"]:hover {
+        background-color: transparent;
+        color: #e74c3c;
+    }
+
+    .tree-label.project-name[data-project="crusade-to-die"]:hover {
+        background-color: transparent;
+        color: #ffeb3b;
+    }
+
+    /* Selected state (can be toggled with JS) */
+    .tree-label.project-name.selected[data-project="inscripted"] {
+        background-color: transparent;
+        color: #ff8c00;
+    }
+
+    .tree-label.project-name.selected[data-project="fontspopuli"] {
+        background-color: transparent;
+        color: #4a90e2;
+    }
+
+    .tree-label.project-name.selected[data-project="replant"] {
+        background-color: transparent;
+        color: #8ae234;
+    }
+
+    .tree-label.project-name.selected[data-project="whale-eater"] {
+        background-color: transparent;
+        color: #e74c3c;
+    }
+
+    .tree-label.project-name.selected[data-project="crusade-to-die"] {
+        background-color: transparent;
+        color: #ffeb3b;
+    }
+
     .tree-description {
         color: #888;
-        font-size: 14px;
+        font-size: 16px;
         margin-left: 0.5rem;
     }
 
     /* Progress Bar */
     .progress-container {
-        margin: 0.5rem 0;
+        margin: 0.25rem 0;
     }
 
-    .progress-text {
-        margin-bottom: 0.25rem;
-        color: #ddd;
-    }
-
-    .progress-bar-wrapper {
+    .progress-line {
         display: flex;
         align-items: center;
-        font-family: monospace;
-        position: relative;
+        gap: 0.5rem;
     }
 
-    .progress-bar {
-        position: absolute;
-        top: 0;
-        left: 0;
-        overflow: hidden;
-    }
-
-    .progress-fill {
-        color: #300a24;
-        background: #8ae234;
-        padding: 0 0.2rem;
+    .progress-arrow {
+        color: #729fcf;
         font-weight: bold;
     }
 
-    .progress-empty {
-        color: #555;
+    .progress-label {
+        color: #ddd;
+    }
+
+    .progress-ascii-bar {
+        color: #8ae234;
+        font-weight: bold;
+        font-family: 'Ubuntu Mono', monospace;
     }
 
     /* Terminal Cursor */
@@ -487,7 +577,7 @@ import {
         display: inline-block;
         color: #ddd;
         animation: blink 1s step-end infinite;
-        margin-top: 0.5rem;
+        margin-top: 0.25rem;
     }
 
     /* Scrollbar Styling */
@@ -538,7 +628,7 @@ import {
 
         .terminal-content {
             padding: 0.5rem;
-            font-size: 14px;
+            font-size: 16px;
         }
     }
 </style>
