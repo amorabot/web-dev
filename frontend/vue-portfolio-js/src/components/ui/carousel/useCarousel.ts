@@ -1,29 +1,56 @@
-import type { Ref, ComputedRef, InjectionKey } from 'vue'
-import { inject, provide } from 'vue'
-import type { EmblaCarouselType } from 'embla-carousel'
+import type { UnwrapRefCarouselApi as CarouselApi, CarouselEmits, CarouselProps } from "./interface"
+import { createInjectionState } from "@vueuse/core"
+import emblaCarouselVue from "embla-carousel-vue"
+import { onMounted, ref } from "vue"
 
-export interface CarouselState {
-  emblaApi: Ref<EmblaCarouselType | undefined>
-  canScrollNext: Ref<boolean>
-  canScrollPrev: Ref<boolean>
-  scrollPrev: () => void
-  scrollNext: () => void
-  scrollTo: (index: number) => void
-  orientation: ComputedRef<string>
-}
+const [useProvideCarousel, useInjectCarousel] = createInjectionState(
+  ({
+    opts,
+    orientation,
+    plugins,
+  }: CarouselProps, emits: CarouselEmits) => {
+    const [emblaNode, emblaApi] = emblaCarouselVue({
+      ...opts,
+      axis: orientation === "horizontal" ? "x" : "y",
+    }, plugins)
 
-const INJECTION_KEY = Symbol('carousel') as InjectionKey<CarouselState>
+    function scrollPrev() {
+      emblaApi.value?.scrollPrev()
+    }
+    function scrollNext() {
+      emblaApi.value?.scrollNext()
+    }
 
-export function useProvideCarousel(carouselState: CarouselState) {
-  provide(INJECTION_KEY, carouselState)
-}
+    const canScrollNext = ref(false)
+    const canScrollPrev = ref(false)
 
-export function useCarousel() {
-  const carouselState = inject(INJECTION_KEY)
+    function onSelect(api: CarouselApi) {
+      canScrollNext.value = api?.canScrollNext() || false
+      canScrollPrev.value = api?.canScrollPrev() || false
+    }
 
-  if (!carouselState) {
-    throw new Error('useCarousel must be used within a <Carousel />')
-  }
+    onMounted(() => {
+      if (!emblaApi.value)
+        return
+
+      emblaApi.value?.on("init", onSelect)
+      emblaApi.value?.on("reInit", onSelect)
+      emblaApi.value?.on("select", onSelect)
+
+      emits("init-api", emblaApi.value)
+    })
+
+    return { carouselRef: emblaNode, carouselApi: emblaApi, canScrollPrev, canScrollNext, scrollPrev, scrollNext, orientation }
+  },
+)
+
+function useCarousel() {
+  const carouselState = useInjectCarousel()
+
+  if (!carouselState)
+    throw new Error("useCarousel must be used within a <Carousel />")
 
   return carouselState
 }
+
+export { useCarousel, useProvideCarousel }

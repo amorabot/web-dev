@@ -1,10 +1,8 @@
-<script setup>
-import { MenubarGroup } from "reka-ui";
+<script setup lang="ts">
+import type { MenubarGroupProps } from "reka-ui"
+import { MenubarGroup } from "reka-ui"
 
-const props = defineProps({
-  asChild: { type: Boolean, required: false },
-  as: { type: null, required: false },
-});
+const props = defineProps<MenubarGroupProps>()
 </script>
 
 <template>

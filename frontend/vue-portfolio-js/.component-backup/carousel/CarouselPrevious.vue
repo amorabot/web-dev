@@ -1,13 +1,10 @@
-<script setup lang="ts">
-import type { WithClassAsProps } from "./interface"
-import { ArrowLeft } from "lucide-vue-next"
-import { cn } from "@/lib/utils"
+<script setup>
+import { useCarousel } from './useCarousel'
 import { Button } from '@/components/ui/button'
-import { useCarousel } from "./useCarousel"
+import { ArrowLeft } from 'lucide-vue-next'
+import { cn } from '@/lib/utils'
 
-const props = defineProps<WithClassAsProps>()
-
-const { canScrollPrev, scrollPrev } = useCarousel()
+const { orientation, canScrollPrev, scrollPrev } = useCarousel()
 </script>
 
 <template>
@@ -15,7 +12,7 @@ const { canScrollPrev, scrollPrev } = useCarousel()
     v-if="canScrollPrev"
     :class="cn(
       'absolute h-14 w-14 rounded-full shadow-xl transition-all duration-300 hover:scale-110 top-1/2 -translate-y-1/2 z-10',
-      props.class
+      $attrs.class
     )"
     :style="{
       backgroundColor: 'hsl(71, 58%, 31%)',
@@ -27,8 +24,8 @@ const { canScrollPrev, scrollPrev } = useCarousel()
     variant="ghost"
     size="icon"
     @click="scrollPrev"
-    @mouseenter="(e: MouseEvent) => (e.currentTarget as HTMLElement).style.backgroundColor = 'hsl(73, 34%, 24%)'"
-    @mouseleave="(e: MouseEvent) => (e.currentTarget as HTMLElement).style.backgroundColor = 'hsl(71, 58%, 31%)'"
+    @mouseenter="(e) => e.currentTarget.style.backgroundColor = 'hsl(73, 34%, 24%)'"
+    @mouseleave="(e) => e.currentTarget.style.backgroundColor = 'hsl(71, 58%, 31%)'"
   >
     <ArrowLeft class="h-7 w-7" />
     <span class="sr-only">Previous slide</span>

@@ -1,72 +1,47 @@
 <script setup lang="ts">
-import { ref, computed, watch, onMounted, onUnmounted } from 'vue'
-import emblaCarouselVue from 'embla-carousel-vue'
-import type { EmblaCarouselType, EmblaOptionsType, EmblaPluginType } from 'embla-carousel'
-import { useProvideCarousel } from './useCarousel'
+import type { CarouselEmits, CarouselProps, WithClassAsProps } from "./interface"
+import { cn } from "@/lib/utils"
+import { useProvideCarousel } from "./useCarousel"
+import { onMounted, onUnmounted } from 'vue'
 
-interface Props {
-  opts?: EmblaOptionsType
-  plugins?: EmblaPluginType[]
-  orientation?: 'horizontal' | 'vertical'
-}
-
-const props = withDefaults(defineProps<Props>(), {
-  opts: () => ({}),
-  plugins: () => [],
-  orientation: 'horizontal'
+const props = withDefaults(defineProps<CarouselProps & WithClassAsProps>(), {
+  orientation: "horizontal",
 })
 
-const emit = defineEmits<{
-  'init-api': [api: EmblaCarouselType]
-}>()
+const emits = defineEmits<CarouselEmits>()
 
-const [emblaNode, emblaApi] = emblaCarouselVue(
-  computed(() => ({
-    ...props.opts,
-    axis: props.orientation === 'horizontal' ? 'x' : 'y'
-  })),
-  props.plugins
-)
+const { canScrollNext, canScrollPrev, carouselApi, carouselRef, orientation, scrollNext, scrollPrev } = useProvideCarousel(props, emits)
 
-const canScrollNext = ref(false)
-const canScrollPrev = ref(false)
-
-const updateScrollState = () => {
-  if (!emblaApi.value) return
-
-  canScrollNext.value = emblaApi.value.canScrollNext()
-  canScrollPrev.value = emblaApi.value.canScrollPrev()
-}
-
-watch(emblaApi, (api) => {
-  if (!api) return
-
-  updateScrollState()
-
-  api.on('select', updateScrollState)
-  api.on('reInit', updateScrollState)
-
-  // Emit the API instance to parent component
-  emit('init-api', api)
+defineExpose({
+  canScrollNext,
+  canScrollPrev,
+  carouselApi,
+  carouselRef,
+  orientation,
+  scrollNext,
+  scrollPrev,
 })
 
-function scrollPrev() {
-  emblaApi.value?.scrollPrev()
-}
+function onKeyDown(event: KeyboardEvent) {
+  const prevKey = props.orientation === "vertical" ? "ArrowUp" : "ArrowLeft"
+  const nextKey = props.orientation === "vertical" ? "ArrowDown" : "ArrowRight"
 
-function scrollNext() {
-  emblaApi.value?.scrollNext()
-}
+  if (event.key === prevKey) {
+    event.preventDefault()
+    scrollPrev()
 
-function scrollTo(index: number) {
-  emblaApi.value?.scrollTo(index)
-}
+    return
+  }
 
-const orientation = computed(() => props.orientation)
+  if (event.key === nextKey) {
+    event.preventDefault()
+    scrollNext()
+  }
+}
 
 // Mouse wheel scroll functionality
 const handleWheel = (event: WheelEvent) => {
-  if (!emblaApi.value) return
+  if (!carouselApi.value) return
 
   // Prevent default scroll behavior
   event.preventDefault()
@@ -86,36 +61,26 @@ const handleWheel = (event: WheelEvent) => {
 }
 
 onMounted(() => {
-  if (emblaNode.value) {
-    emblaNode.value.addEventListener('wheel', handleWheel, { passive: false })
+  if (carouselRef.value) {
+    carouselRef.value.addEventListener('wheel', handleWheel, { passive: false })
   }
 })
 
 onUnmounted(() => {
-  if (emblaNode.value) {
-    emblaNode.value.removeEventListener('wheel', handleWheel)
+  if (carouselRef.value) {
+    carouselRef.value.removeEventListener('wheel', handleWheel)
   }
-})
-
-useProvideCarousel({
-  emblaApi,
-  canScrollNext,
-  canScrollPrev,
-  scrollPrev,
-  scrollNext,
-  scrollTo,
-  orientation
 })
 </script>
 
 <template>
   <div
-    :class="['relative w-full', $attrs.class]"
+    :class="cn('relative', props.class)"
     role="region"
     aria-roledescription="carousel"
+    tabindex="0"
+    @keydown="onKeyDown"
   >
-    <div ref="emblaNode" class="overflow-hidden">
-      <slot />
-    </div>
+    <slot :can-scroll-next :can-scroll-prev :carousel-api :carousel-ref :orientation :scroll-next :scroll-prev />
   </div>
 </template>

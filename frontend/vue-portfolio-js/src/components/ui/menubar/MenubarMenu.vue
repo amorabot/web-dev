@@ -1,9 +1,8 @@
-<script setup>
-import { MenubarMenu } from "reka-ui";
+<script setup lang="ts">
+import type { MenubarMenuProps } from "reka-ui"
+import { MenubarMenu } from "reka-ui"
 
-const props = defineProps({
-  value: { type: String, required: false },
-});
+const props = defineProps<MenubarMenuProps>()
 </script>
 
 <template>

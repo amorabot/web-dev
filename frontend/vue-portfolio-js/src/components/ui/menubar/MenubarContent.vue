@@ -1,36 +1,26 @@
-<script setup>
-import { reactiveOmit } from "@vueuse/core";
-import { MenubarContent, MenubarPortal, useForwardProps } from "reka-ui";
-import { cn } from "@/lib/utils";
+<script setup lang="ts">
+import type { MenubarContentProps } from "reka-ui"
+import type { HTMLAttributes } from "vue"
+import { reactiveOmit } from "@vueuse/core"
+import {
+  MenubarContent,
+  MenubarPortal,
+  useForwardProps,
+} from "reka-ui"
+import { cn } from "@/lib/utils"
 
-const props = defineProps({
-  forceMount: { type: Boolean, required: false },
-  loop: { type: Boolean, required: false },
-  side: { type: null, required: false },
-  sideOffset: { type: Number, required: false, default: 8 },
-  sideFlip: { type: Boolean, required: false },
-  align: { type: null, required: false, default: "start" },
-  alignOffset: { type: Number, required: false, default: -4 },
-  alignFlip: { type: Boolean, required: false },
-  avoidCollisions: { type: Boolean, required: false },
-  collisionBoundary: { type: null, required: false },
-  collisionPadding: { type: [Number, Object], required: false },
-  arrowPadding: { type: Number, required: false },
-  sticky: { type: String, required: false },
-  hideWhenDetached: { type: Boolean, required: false },
-  positionStrategy: { type: String, required: false },
-  updatePositionStrategy: { type: String, required: false },
-  disableUpdateOnLayoutShift: { type: Boolean, required: false },
-  prioritizePosition: { type: Boolean, required: false },
-  reference: { type: null, required: false },
-  asChild: { type: Boolean, required: false },
-  as: { type: null, required: false },
-  class: { type: null, required: false },
-});
+const props = withDefaults(
+  defineProps<MenubarContentProps & { class?: HTMLAttributes["class"] }>(),
+  {
+    align: "start",
+    alignOffset: -4,
+    sideOffset: 8,
+  },
+)
 
-const delegatedProps = reactiveOmit(props, "class");
+const delegatedProps = reactiveOmit(props, "class")
 
-const forwardedProps = useForwardProps(delegatedProps);
+const forwardedProps = useForwardProps(delegatedProps)
 </script>
 
 <template>
